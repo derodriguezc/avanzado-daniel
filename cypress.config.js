@@ -9,5 +9,6 @@ module.exports = defineConfig({
     baseUrl: "https://pushing-it.vercel.app",
     watchForFileChanges: false,
     defaultCommandTimeout: 10000,
+    fixturesFolder: "cypress/e2e"
   },
 });

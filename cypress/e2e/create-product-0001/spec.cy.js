@@ -12,7 +12,7 @@ describe(`${scenarioName} - ${module} `, () => {
 
     it('Deberia permitir al usuario crear  un producto', () => {
         cy.get('.chakra-image').should('be.visible');
-        cy.fixture('user-login.json').then((data) => {
+        cy.fixture('create-product-0001/user-login.json').then((data) => {
             utils.getSelector('registertoggle').dblclick();
             utils.getSelector('user').type(data.user);
             utils.getSelector('pass').type(data.pass);
@@ -21,7 +21,7 @@ describe(`${scenarioName} - ${module} `, () => {
             cy.log('Login exitoso')
             utils.getSelector('onlineshoplink').click();
             utils.getSelector('add-product').click();
-            cy.fixture('product.json').then((product) => {
+            cy.fixture('create-product-0001/product.json').then((product) => {
                 utils.getSelector('productName').type(product.productName);
                 utils.getSelector('productPrice').type(product.productPrice);
                 utils.getSelector('productCard').type(product.productImageUrl);
