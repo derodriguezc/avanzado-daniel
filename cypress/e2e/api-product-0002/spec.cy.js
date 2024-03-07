@@ -7,7 +7,6 @@ import { ProductsPage } from "../../support/page/productsPage.js";
 
 describe(`${scenarioName} - ${module} `, () => {
 
-    let token;
     let productNew = {};
     const productsPage = new ProductsPage();
 
@@ -29,9 +28,6 @@ describe(`${scenarioName} - ${module} `, () => {
         }
         cy.createProduct(this.data.productNew).then(response => {
             productNew.responseBody = response.body;
-            console.log('productNewData', productNew.responseBody.product);
-            console.log('productNewData', productNew.responseBody.product._id);
-            console.log('this.data.productEdit', this.data.productEdit)
             cy.editProduct(productNew.responseBody.product._id, this.data.productEdit);
         });
         cy.visit('');
