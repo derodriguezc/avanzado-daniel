@@ -23,6 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+// import sqlServer from 'cypress-sql-server';
+// sqlServer.loadDBCommands(); SQL SERVER
 
 Cypress.Commands.add('getByDataCy', (selector) => {
     return cy.get(`[data-cy=${selector}]`)
@@ -90,6 +92,25 @@ Cypress.Commands.add('deleteProductIfExists', (product_id) => {
     });
 });
 
+Cypress.Commands.add('deleteProduct', (id) => {
+    cy.request({
+        method: "GET",
+        url: `${Cypress.env().baseUrlAPI}/products?id=${id}`,
+        failsOnStatusCode: false,
+        headers: {
+            Authorization: `Bearer ${Cypress.env().token}`
+        }
+    }).its('body.products.docs').each((product) => {
+        cy.request({
+            method: "DELETE",
+            url: `${Cypress.env().baseUrlAPI}/product/${product._id}`,
+            headers: {
+                Authorization: `Bearer ${Cypress.env().token}`,
+            }
+        });
+    });
+
+});
 
 Cypress.Commands.add('createProduct', (product) => {
     cy.request({
@@ -123,5 +144,16 @@ Cypress.Commands.add('editProduct', (productId, product) => {
         },
     }).then((response) => {
         expect(response.status).to.eq(202);
+    });
+});
+
+Cypress.Commands.add('checkBillingSummary', (totalPriceProduct1, totalPriceProduct2) => {
+    cy.get(totalPriceProduct1).then(totalPrice1 => {
+        cy.get(totalPriceProduct2).then(totalPrice2 => {
+            cy.get('[data-cy="totalPriceAmount"]').invoke('text').then(totalPriceSummary => {
+                let totalPriceSummaryNumerico = parseFloat(totalPriceSummary.replace('$', ''));
+                expect(totalPriceSummaryNumerico).to.be.equal(totalPrice1 + totalPrice2);
+            });
+        });
     });
 });

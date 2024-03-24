@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cypress open --e2e -b electron",
-    "cypress:run" : "npx cypress run --record --key f5e549db-942b-4a2e-a668-a4e69d08b110"
+    "cypress:run": "npx cypress run --record --key f5e549db-942b-4a2e-a668-a4e69d08b110"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^13.6.4"
+    "cypress": "^13.7.1",
+    "cypress-sql-server": "^1.0.0",
+    "pg": "^8.11.3"
   }
 }

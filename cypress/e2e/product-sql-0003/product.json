@@ -1,0 +1,14 @@
+{
+    "product1": {
+        "name" : "Assassin's Credd MiRAGE",
+        "price" : "30",
+        "image" : "https://m.media-amazon.com/images/I/81f4wj4xjoL._AC_UY327_FMwebp_QL65_.jpg",
+        "id" : "7070"
+    },
+    "product2": {
+        "name" : "Need for Speed",
+        "price" : "50",
+        "image" : "https://i.ytimg.com/vi/MHxg4okx5X4/maxresdefault.jpg",
+        "id" : "7071"
+    }
+}
