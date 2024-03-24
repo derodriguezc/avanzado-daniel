@@ -3,12 +3,8 @@ const module = directorioName.split(/[/]/)[2]
 const scenarioName = directorioName.slice(directorioName.lastIndexOf('/') + 1).split('-').slice(0, -1).join('-');
 const testCaseId = directorioName.split(/[-]/).pop();
 
-import { ProductsPage } from "../../support/page/productsPage.js";
 
 describe(`${scenarioName} - ${module} `, () => {
-
-    const productsPage = new ProductsPage();
-
 
     before(() => {
         cy.login(Cypress.env().usuario, Cypress.env().password);
@@ -85,7 +81,7 @@ describe(`${scenarioName} - ${module} `, () => {
             const orden = interception.response.body.product.sellid;
             const query = `SELECT pp.*, s.* FROM public."purchaseProducts" AS pp JOIN sells AS s ON pp.sell_id = s.id WHERE s.id = '${orden}';`;
             cy.task("connectDB", query).then(result => {
-                console.log("result",result);
+                console.log("result", result);
                 expect(result[0].sell_id).to.be.equal(orden);
             });
         });
